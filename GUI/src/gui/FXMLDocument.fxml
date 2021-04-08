@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="555.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXMLDocumentController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+        <Button fx:id="button" layoutX="773.0" layoutY="485.0" onAction="#handleButtonAction" text="Continue" />
+        <Label fx:id="label_date" layoutX="739.0" layoutY="48.0" minHeight="16" minWidth="69" textAlignment="CENTER">
+         <font>
+            <Font size="28.0" />
+         </font></Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Ece.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="291.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Class Attendance System" />
+      <Label fx:id="label_hour" layoutX="673.0" layoutY="88.0" prefHeight="65.0" prefWidth="200.0">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="18.0" />
+         </font></Label>
     </children>
 </AnchorPane>
