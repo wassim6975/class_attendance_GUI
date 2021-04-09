@@ -1,4 +1,4 @@
-# Class_Attendance_GUI
+# class_attendance_GUI
 
 (in progress)
 This is an Electronic school project - class attendance with NFC
