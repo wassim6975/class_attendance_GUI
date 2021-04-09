@@ -52,13 +52,13 @@
             </Tab>
         </tabs>
       </TabPane>
-      <SplitMenuButton layoutX="24.0" layoutY="493.0" mnemonicParsing="false" text="Filter by">
+      <SplitMenuButton layoutX="24.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleButtonFilter" text="Filter by">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </SplitMenuButton>
-      <Button layoutX="166.0" layoutY="493.0" mnemonicParsing="false" text="Search student" />
+      <Button layoutX="166.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleButtonSearch" text="Search student" />
       <Button layoutX="688.0" layoutY="493.0" mnemonicParsing="false" text="Add manually student" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="25.0" />
    </children>
 </AnchorPane>

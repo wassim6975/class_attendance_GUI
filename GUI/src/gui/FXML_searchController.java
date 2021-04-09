@@ -14,11 +14,13 @@ import javafx.fxml.Initializable;
  *
  * @author vithu
  */
+
 public class FXML_searchController implements Initializable {
 
     /**
      * Initializes the controller class.
      */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

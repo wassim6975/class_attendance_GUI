@@ -44,8 +44,6 @@ public class FXMLDocumentController implements Initializable {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        System.out.println("You clicked me!");
-
     }
     
     @Override
