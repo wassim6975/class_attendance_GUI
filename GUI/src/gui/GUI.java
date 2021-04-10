@@ -20,7 +20,13 @@ public class GUI extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+
+        // test
+        Connexion connexion = new Connexion();
+        connexion.connect();
+        connexion.selectAll();
+        // fin du test
+
         Scene scene = new Scene(root);
         stage.setTitle("ECE class attendance");
         stage.setScene(scene);
