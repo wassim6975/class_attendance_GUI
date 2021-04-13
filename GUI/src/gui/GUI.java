@@ -21,7 +21,7 @@ public class GUI extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 
-        // test
+        // test base de données sqlite
         Connexion connexion = new Connexion();
         connexion.connect();
         connexion.selectAll();

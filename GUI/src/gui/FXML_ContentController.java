@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -40,6 +42,7 @@ public class FXML_ContentController implements Initializable {
     public TableColumn<Student, String> DateColumn;
     public TableColumn<Student, String> HourColumn;
     public TableView<Student> tableViewStudents;
+    public List<Student> data = new ArrayList<Student>();
 
     /**
      * Initializes the controller class.
@@ -85,10 +88,23 @@ public class FXML_ContentController implements Initializable {
 
         tableViewStudents.setEditable(true);
 
+        //Connexion à la base de données sqlite
+        Connexion connexion = new Connexion();
+        connexion.connect();
+        // Récuperation des données venant de la base de données
+        data = connexion.retunData ();
+
         ObservableList<Student> observableList = FXCollections.observableArrayList(
-                new Student("1256777","Kebab","zz","dd", "d"),
-                new Student("12737731","ECE","zz","dd", "d")
+                new Student("1855637","DUPONT","Marie","24/03/2021", "15:21"),
+                new Student("1256777","JEAN","Pascale","13/04/2021", "17:33")
         );
+
+        // Remplissage de la base de données
+       for (int i = 0; i < data.size(); i++) {
+           observableList.add(data.get(i));
+           //observableList.add(new Student("1256777","Kebab","zz","dd", "d"));
+       }
+
         tableViewStudents.setItems(observableList);
     }    
     
