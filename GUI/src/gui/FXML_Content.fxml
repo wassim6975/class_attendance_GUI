@@ -15,14 +15,23 @@
         <tabs>
           <Tab text="General">
                <content>
-                  <TableView prefHeight="411.0" prefWidth="912.0">
+                  <TableView fx:id="tableViewStudents" prefHeight="411.0" prefWidth="912.0">
                     <columns>
-                      <TableColumn prefWidth="119.0" text="Student ID" />
-                      <TableColumn minWidth="0.0" prefWidth="255.0" text="Lastname" />
-                        <TableColumn minWidth="0.0" prefWidth="255.0" text="Firstname" />
-                        <TableColumn minWidth="0.0" prefWidth="175.0" text="Date" />
-                        <TableColumn prefWidth="122.0" text="Hour" />
+                        <TableColumn fx:id="IDColumn" prefWidth="119.0" text="Student ID">
+                        </TableColumn>
+                        <TableColumn fx:id="LastNameColumn" minWidth="0.0" prefWidth="255.0" text="Lastname" >
+                        </TableColumn>
+                        <TableColumn fx:id="FirstNameColumn" minWidth="0.0" prefWidth="255.0" text="Firstname" >
+                        </TableColumn>
+                        <TableColumn fx:id="DateColumn" minWidth="0.0" prefWidth="175.0" text="Date" >
+                        </TableColumn>
+                        <TableColumn fx:id="HourColumn" prefWidth="122.0" text="Hour" >
+
+                        </TableColumn>
                     </columns>
+                      <sortOrder>
+                          <fx:reference source="LastNameColumn"/>
+                      </sortOrder>
                   </TableView>
                </content>
             </Tab>
