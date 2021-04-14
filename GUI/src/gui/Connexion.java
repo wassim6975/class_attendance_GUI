@@ -13,7 +13,7 @@ public class Connexion {
 
     public Connection connect() {
         // SQLite connection string (à modifier selon le path)
-        String url = "jdbc:sqlite:/Users/wassimbenjabria/documents/ece/inge4/pcb/projet/class_attendance_GUI/students.db";
+        String url = "jdbc:sqlite:./../students.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
