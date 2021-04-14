@@ -12,7 +12,7 @@ import java.util.List;
 public class Connexion {
 
     public Connection connect() {
-        // SQLite connection string (à modifier selon le path)
+        // SQLite path
         String url = "jdbc:sqlite:./../students.db";
         Connection conn = null;
         try {
