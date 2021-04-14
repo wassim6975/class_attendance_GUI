@@ -1,6 +1,5 @@
 # class_attendance_GUI
 
-(in progress ...)
 This is an Electronic school project - class attendance with NFC
 Here is a GUI for the class attendance created with JAVA FX.
 
