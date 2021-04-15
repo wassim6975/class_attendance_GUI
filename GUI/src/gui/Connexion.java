@@ -23,13 +23,13 @@ public class Connexion {
         return conn;
     }
 
-    public void selectAll(){
+    public void selectAll() {
         String sql = "SELECT * FROM students";
 
         try {
             Connection conn = this.connect();
-            Statement stmt  = conn.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
 
             // loop through the result set
             while (rs.next()) {
@@ -41,21 +41,24 @@ public class Connexion {
         }
     }
 
-    public List<Student> retunData (){
+    public List<Student> retunData() {
         String sql = "SELECT * FROM students";
         List<Student> data = new ArrayList<Student>();
         try {
             Connection conn = this.connect();
-            Statement stmt  = conn.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
 
             // loop through the result set
             while (rs.next()) {
                 // Recuperation base de données
-                int ID = rs.getInt("ID");
+                String ID = rs.getString("ID");
                 String lastName = rs.getString("LastName");
+                String firstName = rs.getString("FirstName");
+                String Date = rs.getString("Date");
+                String Hours = rs.getString("Hours");
                 // Ajout dans la liste
-                data.add(new Student("1256777",lastName,"zz","dd", "d"));
+                data.add(new Student(ID, lastName, firstName, Date, Hours));
 
             }
         } catch (SQLException e) {
@@ -64,5 +67,37 @@ public class Connexion {
         return data;
     }
 
+
+    public List<String> searchStudent(String FirstNameIn, String LastNameIn) {
+        System.out.println("firstName :" + FirstNameIn);
+        System.out.println("LastName : " + LastNameIn);
+        String sql = "SELECT * FROM students WHERE LastName = \"" + LastNameIn + "\" AND FirstName =\"" + FirstNameIn + "\";";
+        System.out.println(sql);
+        //String sql =  "SELECT * FROM students WHERE LastName = \"BEN JABRIA\" AND FirstName = \"Wassim\";";
+        List<String> data = new ArrayList<String>();
+        //
+        try {
+            Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // loop through the result set
+            while (rs.next()) {
+                // Recuperation base de données
+                String ID = rs.getString("ID");
+                String Date = rs.getString("Date");
+                String Hours = rs.getString("Hours");
+                // Ajout dans la liste
+                data.add(ID);
+                data.add(Date);
+                data.add(Hours);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        //
+        return data;
+
+    }
 
 }
