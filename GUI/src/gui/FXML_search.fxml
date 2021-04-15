@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.web.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="gui.FXML_searchController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML_searchController">
    <children>
       <TextField layoutX="244.0" layoutY="43.0" promptText="Firstname" />
       <Button layoutX="485.0" layoutY="43.0" mnemonicParsing="false" text="ok" />
       <TextField layoutX="14.0" layoutY="43.0" promptText="Lastname" />
       <ImageView fx:id="img_photo" fitHeight="150.0" fitWidth="200.0" layoutX="319.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="label_lastName" layoutX="14.0" layoutY="125.0" prefHeight="39.0" prefWidth="186.0" />
-      <Label fx:id="label_firstName" layoutX="58.0" layoutY="200.0" prefHeight="39.0" prefWidth="186.0" />
-      <Label fx:id="label_studentID" layoutX="26.0" layoutY="181.0" prefHeight="39.0" prefWidth="186.0" />
-      <Label fx:id="label_lastBadged" layoutX="26.0" layoutY="323.0" prefHeight="39.0" prefWidth="186.0" />
+      <Label fx:id="label_lastName" layoutX="242.0" layoutY="131.0" prefHeight="39.0" prefWidth="186.0" />
+      <Label fx:id="label_firstName" layoutX="232.0" layoutY="193.0" prefHeight="39.0" prefWidth="186.0" />
+      <Label fx:id="label_studentID" layoutX="226.0" layoutY="244.0" prefHeight="39.0" prefWidth="186.0" />
+      <TextField layoutX="26.0" layoutY="263.0" promptText="Hours" />
+      <TextField layoutX="26.0" layoutY="200.0" promptText="Date" />
+      <TextField layoutX="26.0" layoutY="138.0" promptText="Student ID" />
    </children>
 </AnchorPane>
