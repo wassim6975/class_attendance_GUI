@@ -28,7 +28,6 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author vithu
  */
 public class FXMLDocumentController implements Initializable {
     @FXML
@@ -57,7 +56,6 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         label_date.setText(getDate());
         label_hour.setText(getHour());
     }

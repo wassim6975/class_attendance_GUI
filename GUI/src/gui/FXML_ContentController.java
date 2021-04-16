@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import com.fazecast.jSerialComm.*;
 
 /**
  * FXML Controller class
@@ -43,6 +44,7 @@ public class FXML_ContentController implements Initializable {
     public TableColumn<Student, String> HourColumn;
     public TableView<Student> tableViewStudents;
     public List<Student> data = new ArrayList<Student>();
+
 
     /**
      * Initializes the controller class.
@@ -77,6 +79,21 @@ public class FXML_ContentController implements Initializable {
             System.err.println(e.getMessage());
         }
     }
+// in progress
+    private String serialDataGet()  {
+        String ID = "";
+        SerialPort comPort = SerialPort.getCommPorts()[1];
+        comPort.setBaudRate(8000);
+        comPort.openPort();
+        System.out.println("Connected:" + comPort.getDescriptivePortName());
+        byte[] newData = new byte[comPort.bytesAvailable()];
+        int numRead = comPort.readBytes(newData, newData.length);
+        if (numRead > 0) {
+            System.out.println("Read " + numRead + " bytes: " + new String(newData));
+        }
+        return ID;
+    }
+    //
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -106,6 +123,18 @@ public class FXML_ContentController implements Initializable {
        }
 
         tableViewStudents.setItems(observableList);
+       // test .........................................
+        String idSerial = serialDataGet();
+        System.out.println(idSerial);
+
+        // Comparaison pour savoir si l'étudiant est présent
+        for (int i = 0; i < data.size(); i++) {
+            String idBD = data.get(i).getID();
+            if (idBD.equals(idSerial)) {
+                System.out.println(data.get(i).getFirstName()+" is present");
+            }
+        }
+        // test ..............................................;
     }    
     
 }

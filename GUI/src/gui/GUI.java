@@ -10,22 +10,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.application.Platform;
 
 /**
  *
  * @author vithu
  */
 public class GUI extends Application {
-    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-
-        // test base de données sqlite
-        Connexion connexion = new Connexion();
-        connexion.connect();
-        connexion.selectAll();
-        // fin du test
 
         Scene scene = new Scene(root);
         stage.setTitle("ECE class attendance");

@@ -75,7 +75,6 @@ public class Connexion {
         System.out.println(sql);
         //String sql =  "SELECT * FROM students WHERE LastName = \"BEN JABRIA\" AND FirstName = \"Wassim\";";
         List<String> data = new ArrayList<String>();
-        //
         try {
             Connection conn = this.connect();
             Statement stmt = conn.createStatement();
