@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="555.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML_ContentController">
+   <children>
+      <TabPane prefHeight="477.0" prefWidth="912.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="General">
+               <content>
+                  <TableView fx:id="tableViewStudents" prefHeight="411.0" prefWidth="912.0">
+                    <columns>
+                        <TableColumn fx:id="IDColumn" prefWidth="119.0" text="Student ID">
+                        </TableColumn>
+                        <TableColumn fx:id="LastNameColumn" minWidth="0.0" prefWidth="255.0" text="Lastname">
+                        </TableColumn>
+                        <TableColumn fx:id="FirstNameColumn" minWidth="0.0" prefWidth="255.0" text="Firstname">
+                        </TableColumn>
+                        <TableColumn fx:id="DateColumn" minWidth="0.0" prefWidth="175.0" text="Date">
+                        </TableColumn>
+                        <TableColumn fx:id="HourColumn" prefWidth="122.0" text="Hour">
+
+                        </TableColumn>
+                    </columns>
+                      <sortOrder>
+                          <fx:reference source="LastNameColumn" />
+                      </sortOrder>
+                  </TableView>
+               </content>
+            </Tab>
+          <Tab text="Tardy">
+               <content>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn prefWidth="119.0" text="Student ID" />
+                        <TableColumn minWidth="0.0" prefWidth="255.0" text="Lastname" />
+                        <TableColumn minWidth="0.0" prefWidth="255.0" text="Firstname" />
+                        <TableColumn minWidth="0.0" prefWidth="175.0" text="Date" />
+                        <TableColumn prefWidth="122.0" text="Hour" />
+                     </columns>
+                  </TableView>
+               </content>
+            </Tab>
+            <Tab text="Abs">
+               <content>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn prefWidth="119.0" text="Student ID" />
+                        <TableColumn minWidth="0.0" prefWidth="255.0" text="Lastname" />
+                        <TableColumn minWidth="0.0" prefWidth="255.0" text="Firstname" />
+                     </columns>
+                  </TableView>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleButtonSearch" text="Search student" />
+      <Button layoutX="688.0" layoutY="493.0" mnemonicParsing="false" text="Add manually student" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="25.0" />
+   </children>
+</AnchorPane>
