@@ -113,7 +113,7 @@ public class FXML_ContentController implements Initializable {
         }
     }
 
-    private void serialData(List<Student> data, ObservableList<Student> observableList)  {
+    private void serialData()  {
         String ID = "";
         System.out.println(SerialPort.getCommPorts()[0]);
         SerialPort ComPort = SerialPort.getCommPorts()[0];
@@ -130,14 +130,21 @@ public class FXML_ContentController implements Initializable {
             // conversion bytes to String
             ID = new String(newData);
 
+            tableViewPresent.setItems(observablePresent);
+
+            //Connexion à la base de données sqlite
+            Connexion connexion = new Connexion();
+            connexion.connect();
+            data = connexion.retunData ();
+
             // Recherche d'un ID similaire à ceux dans la base de données
             for (int i = 0; i < data.size(); i++) {
                 String idBD = data.get(i).getID();
                 if (idBD.equals(ID)) {
                     System.out.println(data.get(i).getFirstName()+"ID enregistré dans la base de données");
                     // Ajout dans le tableau de présence
-                    observableList.add(data.get(i));
-                    tableViewPresent.setItems(observableList);
+                    observablePresent.add(data.get(i));
+                    tableViewPresent.setItems(observablePresent);
                     //
                 } else{
                     System.out.println("Badge/Carte non connu, veuillez l'ajouter");
@@ -194,8 +201,8 @@ public class FXML_ContentController implements Initializable {
             public void run() {
                 // Toutes les 0.5 secondes
                 // Tentative de lecture port com
-                serialData(data, observablePresent);
-                System.out.println("Tentative de lecture de carte");
+                serialData();
+                //System.out.println("Tentative de lecture de carte");
 
             }
         }, 0, 500);
