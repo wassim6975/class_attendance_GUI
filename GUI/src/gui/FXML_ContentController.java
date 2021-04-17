@@ -54,15 +54,24 @@ public class FXML_ContentController implements Initializable {
     public TableView<Student> tableViewAbsent;
     public List<Student> data = new ArrayList<Student>();
 
+    ObservableList<Student> observableList = FXCollections.observableArrayList(
+            new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
+            new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
+    );
+    ObservableList<Student> observablePresent = FXCollections.observableArrayList(
+            new Student("1855637","LEE","Tar","24/03/2021", "15:21"),
+            new Student("1256777","Marie","Sofie","13/04/2021", "17:33")
+    );
+    ObservableList<Student> observableAbsent = FXCollections.observableArrayList(
+            new Student("1855637","Lancelot","Bob","24/03/2021", "15:21"),
+            new Student("1256777","King","Rafael","13/04/2021", "17:33")
+    );
+
 
     /**
      * Initializes the controller class.
      */
 
-    @FXML
-    private void handleButtonFilter(ActionEvent event) throws IOException {
-        // TODO
-    }
 
     @FXML
     private void handleButtonSearch(ActionEvent event) throws IOException {
@@ -86,9 +95,24 @@ public class FXML_ContentController implements Initializable {
             stage3.setScene(new Scene(root3));
             stage3.show();
         } catch (Exception e) {
-
         }
     }
+    public void handleButtonRefreshStudents(ActionEvent actionEvent) {
+        observableList.removeAll(data);
+        tableViewStudents.setItems(observableList);
+
+        //Connexion à la base de données sqlite
+        Connexion connexion = new Connexion();
+        connexion.connect();
+
+        data = connexion.retunData ();
+        for (int i = 0; i < data.size(); i++) {
+            observableList.add(data.get(i));
+            System.out.println(data.get(i));
+            tableViewPresent.setItems(observableList);
+        }
+    }
+
     private void serialData(List<Student> data, ObservableList<Student> observableList)  {
         String ID = "";
         System.out.println(SerialPort.getCommPorts()[0]);
@@ -153,18 +177,7 @@ public class FXML_ContentController implements Initializable {
         // Récuperation des données venant de la base de données
         data = connexion.retunData ();
 
-        ObservableList<Student> observableList = FXCollections.observableArrayList(
-                new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
-                new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
-        );
-        ObservableList<Student> observablePresent = FXCollections.observableArrayList(
-                new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
-                new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
-        );
-        ObservableList<Student> observableAbsent = FXCollections.observableArrayList(
-                new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
-                new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
-        );
+
         tableViewPresent.setItems(observablePresent);
         tableViewAbsent.setItems(observableAbsent);
 

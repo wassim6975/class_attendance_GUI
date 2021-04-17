@@ -27,8 +27,6 @@ public class FXMLAddStudentController {
 
         // add in tablewiew student
         System.out.println("Student added");
-        System.out.println(ID2);
-        System.out.println(FirstNameIn);
-        System.out.println(lastNameIn);
     }
+
 }

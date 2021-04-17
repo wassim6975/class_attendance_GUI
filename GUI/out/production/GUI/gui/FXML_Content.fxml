@@ -72,5 +72,6 @@
       </TabPane>
       <Button layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleButtonSearch" text="Search student" />
       <Button layoutX="717.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleButtonAddStudent" text="Add manually student" />
+      <Button layoutX="614.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleButtonRefreshStudents" text="Refresh table" />
    </children>
 </AnchorPane>
