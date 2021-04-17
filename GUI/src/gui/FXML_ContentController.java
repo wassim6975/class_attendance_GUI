@@ -194,8 +194,8 @@ public class FXML_ContentController implements Initializable {
             public void run() {
                 // Toutes les 0.5 secondes
                 // Tentative de lecture port com
-                //serialData(data, observablePresent);
-                //System.out.println("Tentative de lecture de carte");
+                serialData(data, observablePresent);
+                System.out.println("Tentative de lecture de carte");
 
             }
         }, 0, 500);
