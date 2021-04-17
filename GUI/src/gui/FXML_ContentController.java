@@ -201,12 +201,16 @@ public class FXML_ContentController implements Initializable {
 
        // test .........................................
         SerialPort comPort = SerialPort.getCommPorts()[0];
+        comPort.setBaudRate(9600);
         comPort.openPort();
         MessageListner listener = new MessageListner();
         comPort.addDataListener(listener);
         try { Thread.sleep(5000); } catch (Exception e) { e.printStackTrace(); }
-        comPort.removeDataListener();
-        comPort.closePort();
+        byte[] newData = new byte[comPort.bytesAvailable()];
+        System.out.println(new String(newData));
+        // fin test
+        //comPort.removeDataListener();
+        //comPort.closePort();
 
 
         Timer t = new Timer();
