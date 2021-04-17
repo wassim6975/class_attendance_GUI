@@ -9,10 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
+import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,7 +39,19 @@ public class FXML_ContentController implements Initializable {
     public TableColumn<Student, String> FirstNameColumn;
     public TableColumn<Student, String> DateColumn;
     public TableColumn<Student, String> HourColumn;
+    public TableColumn<Student, String> IDColumnP;
+    public TableColumn<Student, String> LastNameColumnP;
+    public TableColumn<Student, String> FirstNameColumnP;
+    public TableColumn<Student, String> DateColumnP;
+    public TableColumn<Student, String> HourColumnP;
+    public TableColumn<Student, String> IDColumnA;
+    public TableColumn<Student, String> LastNameColumnA;
+    public TableColumn<Student, String> FirstNameColumnA;
+    public TableColumn<Student, String> DateColumnA;
+    public TableColumn<Student, String> HourColumnA;
     public TableView<Student> tableViewStudents;
+    public TableView<Student> tableViewPresent;
+    public TableView<Student> tableViewAbsent;
     public List<Student> data = new ArrayList<Student>();
 
 
@@ -53,18 +62,6 @@ public class FXML_ContentController implements Initializable {
     @FXML
     private void handleButtonFilter(ActionEvent event) throws IOException {
         // TODO
-    }
-
-    @FXML
-    private void UpdateRows () {
-        //ID.setCellValueFactory(new IDProperty("firstName"));
-        //ID.setCellValueFactory(new PropertyValueFactory<IDProperty, String>("firstName"));
-        //ID.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        //ID.setCellValueFactory();
-        //TableView<String> tableViewStudents;
-        //TableColumn<String, String> ID;
-        //final TableView tableView = new TableView();
-        //tableView .getItems().setAll("car1", "car2", "car3", "car4");
     }
 
     @FXML
@@ -79,8 +76,20 @@ public class FXML_ContentController implements Initializable {
             System.err.println(e.getMessage());
         }
     }
-// in progress
-    private String serialDataGet()  {
+
+    @FXML
+    private void handleButtonAddStudent(ActionEvent event) throws IOException {
+        try {
+            Parent root3 = FXMLLoader.load(getClass().getResource("FXML_AddStudentController.fxml"));
+            Stage stage3 = new Stage();
+            stage3.setTitle("ECE class attendance");
+            stage3.setScene(new Scene(root3));
+            stage3.show();
+        } catch (Exception e) {
+
+        }
+    }
+    private void serialData(List<Student> data, ObservableList<Student> observableList)  {
         String ID = "";
         System.out.println(SerialPort.getCommPorts()[0]);
         SerialPort ComPort = SerialPort.getCommPorts()[0];
@@ -89,14 +98,30 @@ public class FXML_ContentController implements Initializable {
         System.out.println("Connected:" + ComPort.getDescriptivePortName());
 
         byte[] newData = new byte[ComPort.bytesAvailable()];
+        // lecture des données
         int numRead = ComPort.readBytes(newData, newData.length);
         if (numRead > 0) {
             System.out.println("Read " + numRead + " bytes: " + new String(newData));
+
+            // conversion bytes to String
+            ID = new String(newData);
+
+            // Recherche d'un ID similaire à ceux dans la base de données
+            for (int i = 0; i < data.size(); i++) {
+                String idBD = data.get(i).getID();
+                if (idBD.equals(ID)) {
+                    System.out.println(data.get(i).getFirstName()+"ID enregistré dans la base de données");
+                    // Ajout dans le tableau de présence
+                    observableList.add(data.get(i));
+                    tableViewPresent.setItems(observableList);
+                    //
+                } else{
+                    System.out.println("Badge/Carte non connu, veuillez l'ajouter");
+                }
+            }
         }
-        ID = new String(newData);
-        return ID;
     }
-    //
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -106,7 +131,21 @@ public class FXML_ContentController implements Initializable {
         DateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
         HourColumn.setCellValueFactory(new PropertyValueFactory<>("Hours"));
 
+        IDColumnP.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        LastNameColumnP.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        FirstNameColumnP.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        DateColumnP.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        HourColumnP.setCellValueFactory(new PropertyValueFactory<>("Hours"));
+
+        IDColumnA.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        LastNameColumnA.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        FirstNameColumnA.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        DateColumnA.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        HourColumnA.setCellValueFactory(new PropertyValueFactory<>("Hours"));
+
         tableViewStudents.setEditable(true);
+        tableViewPresent.setEditable(true);
+        tableViewAbsent.setEditable(true);
 
         //Connexion à la base de données sqlite
         Connexion connexion = new Connexion();
@@ -115,31 +154,38 @@ public class FXML_ContentController implements Initializable {
         data = connexion.retunData ();
 
         ObservableList<Student> observableList = FXCollections.observableArrayList(
-                new Student("1855637","DUPONT","Marie","24/03/2021", "15:21"),
-                new Student("1256777","JEAN","Pascale","13/04/2021", "17:33")
+                new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
+                new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
         );
+        ObservableList<Student> observablePresent = FXCollections.observableArrayList(
+                new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
+                new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
+        );
+        ObservableList<Student> observableAbsent = FXCollections.observableArrayList(
+                new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
+                new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
+        );
+        tableViewPresent.setItems(observablePresent);
+        tableViewAbsent.setItems(observableAbsent);
 
-        // Remplissage de la base de données
+        //Remplissage du tableau avec la base de données
        for (int i = 0; i < data.size(); i++) {
            observableList.add(data.get(i));
-           //observableList.add(new Student("1256777","Kebab","zz","dd", "d"));
        }
+       tableViewStudents.setItems(observableList);
 
-        tableViewStudents.setItems(observableList);
+
        // test .........................................
-        String ID1 = serialDataGet();
-        System.out.println(ID1);
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                // Toutes les 0.5 secondes
+                // Tentative de lecture port com
+                //serialData(data, observablePresent);
+                //System.out.println("Tentative de lecture de carte");
 
-        // Comparaison pour savoir si l'étudiant est présent
-        for (int i = 0; i < data.size(); i++) {
-            String idBD = data.get(i).getID();
-            if (idBD.equals(ID1)) {
-                System.out.println(data.get(i).getFirstName()+" is present");
-            } else{
-                System.out.println("Pas present");
             }
-        }
-        // test ..............................................;
-    }    
-    
+        }, 0, 500);
+        // test
+    }
 }

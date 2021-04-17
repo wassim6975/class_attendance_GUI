@@ -5,9 +5,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.lang.String;
 
 public class Connexion {
 
@@ -69,10 +73,10 @@ public class Connexion {
 
 
     public List<String> searchStudent(String FirstNameIn, String LastNameIn) {
-        System.out.println("firstName :" + FirstNameIn);
-        System.out.println("LastName : " + LastNameIn);
+        //System.out.println("firstName :" + FirstNameIn);
+        //System.out.println("LastName : " + LastNameIn);
         String sql = "SELECT * FROM students WHERE LastName = \"" + LastNameIn + "\" AND FirstName =\"" + FirstNameIn + "\";";
-        System.out.println(sql);
+        //System.out.println(sql);
         //String sql =  "SELECT * FROM students WHERE LastName = \"BEN JABRIA\" AND FirstName = \"Wassim\";";
         List<String> data = new ArrayList<String>();
         try {
@@ -97,6 +101,37 @@ public class Connexion {
         //
         return data;
 
+    }
+    public String getDate(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+    public String getHour(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+
+    public void addDataDB (int ID1, String lastNameIn, String FirstNameIn) {
+
+        String INSERT_SQL = "INSERT INTO students(ID, LastName, FirstName, Date, Hours) VALUES(?, ?, ?, ?, ?)";
+        PreparedStatement ps = null;
+        try {
+            Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+
+            ps = conn.prepareStatement(INSERT_SQL);
+            ps.setInt(1, ID1);
+            ps.setString(2, lastNameIn);
+            ps.setString(3, FirstNameIn);
+            ps.setString(4, getDate());
+            ps.setString(5, getHour());  // You'll have to update this each and every year. BirthDate would be better.
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

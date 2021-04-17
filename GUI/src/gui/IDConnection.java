@@ -9,15 +9,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/**
- *
- * @author vithu
- */
 public class IDConnection {
     public boolean check(String usr, String pwd) throws FileNotFoundException {
         boolean login = true;
-        //File file_managerId = new File("Professor.txt");
-        File file_managerId = new File("C:\\Users\\vithu\\OneDrive\\Documents\\INGE4\\S8\\Projets technologiques\\ClassAttendanceProject\\class_attendance_GUI\\GUI\\src\\gui\\Professor.txt");
+        File file_managerId = new File("./src/gui/Professor.txt");
+        //File file_managerId = new File("C:\\Users\\vithu\\OneDrive\\Documents\\INGE4\\S8\\Projets technologiques\\ClassAttendanceProject\\class_attendance_GUI\\GUI\\src\\gui\\Professor.txt");
         Scanner input = new Scanner(file_managerId);
         while (input.hasNext()) {
             if (usr.equals(input.next()) && pwd.equals(input.next())) {
