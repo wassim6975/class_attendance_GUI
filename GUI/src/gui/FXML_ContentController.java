@@ -137,6 +137,10 @@ public class FXML_ContentController implements Initializable {
             connexion.connect();
             data = connexion.retunData ();
 
+            /*if (event.getEventType() == SerialPort.LISTENING_EVENT_DATA_WRITTEN)
+                System.out.println("All bytes were successfully transmitted!");
+            }*/
+
             // Recherche d'un ID similaire à ceux dans la base de données
             for (int i = 0; i < data.size(); i++) {
                 String idBD = data.get(i).getID();
@@ -196,16 +200,34 @@ public class FXML_ContentController implements Initializable {
 
 
        // test .........................................
+        SerialPort comPort = SerialPort.getCommPorts()[0];
+        comPort.openPort();
+        MessageListner listener = new MessageListner();
+        comPort.addDataListener(listener);
+        try { Thread.sleep(5000); } catch (Exception e) { e.printStackTrace(); }
+        comPort.removeDataListener();
+        comPort.closePort();
+
+
         Timer t = new Timer();
-        t.schedule(new TimerTask() {
+        /*t.schedule(new TimerTask() {
             public void run() {
                 // Toutes les 0.5 secondes
                 // Tentative de lecture port com
-                serialData();
-                //System.out.println("Tentative de lecture de carte");
+                //serialData();
 
+                SerialPort comPort = SerialPort.getCommPorts()[0];
+                comPort.openPort();
+                MessageListner listener = new MessageListner();
+                comPort.addDataListener(listener);
+                try { Thread.sleep(5000); } catch (Exception e) { e.printStackTrace(); }
+                comPort.removeDataListener();
+                comPort.closePort();
+
+                //System.out.println("Tentative de lecture de carte");
             }
-        }, 0, 500);
+        }, 0, 500);*/
         // test
+
     }
 }
