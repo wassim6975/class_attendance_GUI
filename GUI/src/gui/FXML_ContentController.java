@@ -29,7 +29,6 @@ import com.fazecast.jSerialComm.*;
 /**
  * FXML Controller class
  *
- * @author vithu
  */
 public class FXML_ContentController implements Initializable {
     //public TableView table = new TableView();
@@ -72,6 +71,11 @@ public class FXML_ContentController implements Initializable {
      * Initializes the controller class.
      */
 
+    @FXML
+    public void testSerialCom() {
+        //
+
+    }
 
     @FXML
     private void handleButtonSearch(ActionEvent event) throws IOException {
@@ -199,38 +203,20 @@ public class FXML_ContentController implements Initializable {
        tableViewStudents.setItems(observableList);
 
 
-       // test .........................................
-        SerialPort comPort = SerialPort.getCommPorts()[0];
-        comPort.setBaudRate(9600);
-        comPort.openPort();
-        MessageListner listener = new MessageListner();
-        comPort.addDataListener(listener);
-        try { Thread.sleep(5000); } catch (Exception e) { e.printStackTrace(); }
-        byte[] newData = new byte[comPort.bytesAvailable()];
-        System.out.println(new String(newData));
-        // fin test
         //comPort.removeDataListener();
         //comPort.closePort();
 
 
         Timer t = new Timer();
-        /*t.schedule(new TimerTask() {
+        t.schedule(new TimerTask() {
             public void run() {
                 // Toutes les 0.5 secondes
                 // Tentative de lecture port com
-                //serialData();
-
-                SerialPort comPort = SerialPort.getCommPorts()[0];
-                comPort.openPort();
-                MessageListner listener = new MessageListner();
-                comPort.addDataListener(listener);
-                try { Thread.sleep(5000); } catch (Exception e) { e.printStackTrace(); }
-                comPort.removeDataListener();
-                comPort.closePort();
+                serialData();
 
                 //System.out.println("Tentative de lecture de carte");
             }
-        }, 0, 500);*/
+        }, 0, 500);
         // test
 
     }
