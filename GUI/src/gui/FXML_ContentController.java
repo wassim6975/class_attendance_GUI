@@ -140,7 +140,7 @@ public class FXML_ContentController implements Initializable {
             //Connexion à la base de données sqlite
             Connexion connexion = new Connexion();
             connexion.connect();
-            data = connexion.retunData ();
+            data = connexion.retunData();
 
             /*if (event.getEventType() == SerialPort.LISTENING_EVENT_DATA_WRITTEN)
                 System.out.println("All bytes were successfully transmitted!");
@@ -204,10 +204,6 @@ public class FXML_ContentController implements Initializable {
        tableViewStudents.setItems(observableList);
 
 
-        //comPort.removeDataListener();
-        //comPort.closePort();
-
-
 
 
         // kebab .....
@@ -216,29 +212,68 @@ public class FXML_ContentController implements Initializable {
         Arduino arduino = new Arduino();
         arduino.enable();
         System.out.println(arduino.getListeningEvents());
-        //SerialPort comPort = SerialPort.getCommPorts()[0];
-        //arduino.serialEvent(comPort);
-
-
 
         Timer t = new Timer();
         t.schedule(new TimerTask() {
             public void run() {
-                // Toutes les 1 secondes
-                // Tentative de lecture port com
+                // Toutes secondes
+                // Tentative de lecture du port com
                 //arduino.getData();
-                if (arduino.getData().size() == 12) {
-                    for (int i = 0; i < 12; i++) {
-                        System.out.println("Tableau");
-                        System.out.println(arduino.getData().get(i));
-
-                        //System.out.println("Tentative de lecture de carte");
+                if (arduino.getData().isEmpty() != true)
+                {
+                    int i = 0;
+                    String dataSerial = "";
+                    dataSerial = dataSerial + arduino.getData().get(0);
+                    while (dataSerial.length() != 12)
+                    {
+                        i = i + 1;
+                        dataSerial = dataSerial + arduino.getData().get(i);
                     }
+                    System.out.println("données tableau : "+dataSerial);
+
+                    // Recherche d'un ID similaire à ceux dans la base de données
+                    for (int j = 0; j < data.size(); j++) {
+                        String idBD = data.get(j).getID();
+                        if (idBD.equals(dataSerial)) {
+                            System.out.println(data.get(j).getFirstName()+"ID enregistré dans la base de données");
+                            // Ajout dans le tableau de présence
+                            observablePresent.add(data.get(j));
+                            tableViewPresent.setItems(observablePresent);
+                            //
+                        } else{
+                            System.out.println("Badge/Carte non connu, veuillez l'ajouter");
+                        }
+                    }
+                    // Suppression data
+                    arduino.removeDate();
                 }
+
+                /*if (arduino.getData().size() > 2) {
+                    String dataSerial = "";
+                    for (int i = 0; i < arduino.getData().size(); i++) {
+                        System.out.println("Données venant du Tableau");
+                        System.out.println(arduino.getData().get(i));
+                        dataSerial = dataSerial + arduino.getData().get(i);
+                    }
+
+                    // Recherche d'un ID similaire à ceux dans la base de données
+                    for (int i = 0; i < data.size(); i++) {
+                        String idBD = data.get(i).getID();
+                        if (idBD.equals(dataSerial)) {
+                            System.out.println(data.get(i).getFirstName()+"ID enregistré dans la base de données");
+                            // Ajout dans le tableau de présence
+                            observablePresent.add(data.get(i));
+                            tableViewPresent.setItems(observablePresent);
+                            //
+                        } else{
+                            System.out.println("Badge/Carte non connu, veuillez l'ajouter");
+                        }
+                    }
+                    // Suppression data
+                    arduino.removeDate();
+                }*/
             }
-        }, 0, 1000);
-        // test
-        // salade tomate oignon chef.....
+        }, 0, 2000);
 
     }
 }

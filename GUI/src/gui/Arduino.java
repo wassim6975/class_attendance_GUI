@@ -44,10 +44,11 @@ import java.util.List;
     }
 
     public List<String> getData(){
-        if(Sdata.size() > 11){
-            return Sdata;
-        }
-        return null;
+        return Sdata;
+    }
+
+    public void removeDate() {
+        Sdata.removeAll(Sdata);
     }
 
 }
