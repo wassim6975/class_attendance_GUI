@@ -7,7 +7,7 @@ import com.fazecast.jSerialComm.SerialPortEvent;
 public class Arduino implements SerialPortDataListener{
 
     public void enable() {
-        SerialPort comPort = SerialPort.getCommPort("COM5");
+        SerialPort comPort = SerialPort.getCommPort("COM4");
         System.out.println(comPort.getDescriptivePortName());
         comPort.openPort();
         comPort.setBaudRate(9600);
