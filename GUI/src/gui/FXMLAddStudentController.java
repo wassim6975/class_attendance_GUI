@@ -22,8 +22,7 @@ public class FXMLAddStudentController {
         String FirstNameIn = firstNameAdd.getText();
         String lastNameIn = lastNameAdd.getText();
         String ID1 = IDAdd.getText();
-        int ID2 =Integer.parseInt(ID1);
-        connexion.addDataDB(ID2, lastNameIn, FirstNameIn);
+        connexion.addDataDB(ID1, lastNameIn, FirstNameIn);
 
         // add in tablewiew student
         System.out.println("Student added");

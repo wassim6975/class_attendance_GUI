@@ -56,16 +56,16 @@ public class FXML_ContentController implements Initializable {
     FXMLDocumentController FirstController = new FXMLDocumentController();
 
     ObservableList<Student> observableList = FXCollections.observableArrayList(
-            new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
-            new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
+            new Student("C73D57B3","Castex","Jean","24/03/2021", "15:21"),
+            new Student("C93D57B3","Emmanuel","Macron","13/04/2021", "17:33")
     );
     public ObservableList<Student> observablePresent = FXCollections.observableArrayList(
-            new Student("1855637","LEE","Tar","24/03/2021", "15:21"),
-            new Student("1256777","Marie","Sofie","13/04/2021", "17:33")
+            new Student("D73D57B3","LEE","Tar","24/03/2021", "15:21"),
+            new Student("E73D57B3","Marie","Sofie","13/04/2021", "17:33")
     );
     ObservableList<Student> observableAbsent = FXCollections.observableArrayList(
-            new Student("1855637","Lancelot","Bob","24/03/2021", "15:21"),
-            new Student("1256777","King","Rafael","13/04/2021", "17:33")
+            new Student("A83D57B3","Lancelot","Bob","24/03/2021", "15:21"),
+            new Student("A1D57B3","King","Rafael","13/04/2021", "17:33")
     );
 
 

@@ -37,7 +37,7 @@ public class Connexion {
 
             // loop through the result set
             while (rs.next()) {
-                System.out.println("ID = " + rs.getInt("ID"));
+                System.out.println("ID = " + rs.getString("ID"));
                 System.out.println("LastName = " + rs.getString("LastName"));
             }
         } catch (SQLException e) {
@@ -113,7 +113,7 @@ public class Connexion {
         return dtf.format(now);
     }
 
-    public void addDataDB (int ID1, String lastNameIn, String FirstNameIn) {
+    public void addDataDB (String ID1, String lastNameIn, String FirstNameIn) {
 
         String INSERT_SQL = "INSERT INTO students(ID, LastName, FirstName, Date, Hours) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
@@ -122,7 +122,7 @@ public class Connexion {
             Statement stmt = conn.createStatement();
 
             ps = conn.prepareStatement(INSERT_SQL);
-            ps.setInt(1, ID1);
+            ps.setString(1, ID1);
             ps.setString(2, lastNameIn);
             ps.setString(3, FirstNameIn);
             ps.setString(4, getDate());
