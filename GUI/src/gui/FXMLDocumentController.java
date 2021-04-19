@@ -40,6 +40,7 @@ public class FXMLDocumentController implements Initializable {
     private TextField name;
     @FXML
     private PasswordField password;
+    public String Class_start="";
     
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
@@ -72,6 +73,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void go(ActionEvent event) throws FileNotFoundException, IOException{
         IDConnection manager = new IDConnection();
+        FXML_ContentController content = new FXML_ContentController();
         if(name.getText().isEmpty()||password.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Empty field");
         }
@@ -79,10 +81,11 @@ public class FXMLDocumentController implements Initializable {
             JOptionPane.showMessageDialog(null, "Wrong password");
         }
         else{
-            String Class_start="";
             do{
-            Class_start = JOptionPane.showInputDialog("Class start at: ");
+            Class_start = JOptionPane.showInputDialog("Class start at (HH:MM) : ");
             }while(Class_start.isEmpty());
+            setClassStart(Class_start);
+            System.out.println(Class_start);
             Parent root1 = FXMLLoader.load(getClass().getResource("FXML_Content.fxml"));
             Stage stage1 = new Stage();
             stage1.setTitle("ECE class attendance");
@@ -90,5 +93,11 @@ public class FXMLDocumentController implements Initializable {
             stage1.show();
             
         }
+    }
+    public void setClassStart(String start){
+        Class_start=start;
+    }
+    public String getClassStart(){
+        return Class_start;
     }
 }

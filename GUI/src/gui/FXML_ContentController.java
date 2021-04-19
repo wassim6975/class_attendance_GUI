@@ -53,6 +53,7 @@ public class FXML_ContentController implements Initializable {
     public TableView<Student> tableViewPresent;
     public TableView<Student> tableViewAbsent;
     public List<Student> data = new ArrayList<Student>();
+    FXMLDocumentController FirstController = new FXMLDocumentController();
 
     ObservableList<Student> observableList = FXCollections.observableArrayList(
             new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
@@ -164,7 +165,6 @@ public class FXML_ContentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
         LastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         FirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -202,10 +202,7 @@ public class FXML_ContentController implements Initializable {
            observableList.add(data.get(i));
        }
        tableViewStudents.setItems(observableList);
-
-
-
-
+       
         // kebab .....
         //Platform.runLater()
         //DisplayMessage.displayLater()
