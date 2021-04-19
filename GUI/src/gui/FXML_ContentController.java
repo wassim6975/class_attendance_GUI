@@ -58,7 +58,7 @@ public class FXML_ContentController implements Initializable {
             new Student("1855637","Castex","Jean","24/03/2021", "15:21"),
             new Student("1256777","Emmanuel","Macron","13/04/2021", "17:33")
     );
-    ObservableList<Student> observablePresent = FXCollections.observableArrayList(
+    public ObservableList<Student> observablePresent = FXCollections.observableArrayList(
             new Student("1855637","LEE","Tar","24/03/2021", "15:21"),
             new Student("1256777","Marie","Sofie","13/04/2021", "17:33")
     );
@@ -208,27 +208,36 @@ public class FXML_ContentController implements Initializable {
         //comPort.closePort();
 
 
-        Timer t = new Timer();
-        /*t.schedule(new TimerTask() {
-            public void run() {
-                // Toutes les 0.5 secondes
-                // Tentative de lecture port com
-                serialData();
 
-                //System.out.println("Tentative de lecture de carte");
-            }
-        }, 0, 500);*/
-        // test
 
         // kebab .....
         //Platform.runLater()
         //DisplayMessage.displayLater()
         Arduino arduino = new Arduino();
         arduino.enable();
-        arduino.getListeningEvents();
+        System.out.println(arduino.getListeningEvents());
         //SerialPort comPort = SerialPort.getCommPorts()[0];
         //arduino.serialEvent(comPort);
-        
+
+
+
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                // Toutes les 1 secondes
+                // Tentative de lecture port com
+                //arduino.getData();
+                if (arduino.getData().size() == 12) {
+                    for (int i = 0; i < 12; i++) {
+                        System.out.println("Tableau");
+                        System.out.println(arduino.getData().get(i));
+
+                        //System.out.println("Tentative de lecture de carte");
+                    }
+                }
+            }
+        }, 0, 1000);
+        // test
         // salade tomate oignon chef.....
 
     }
