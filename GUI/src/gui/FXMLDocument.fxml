@@ -62,6 +62,7 @@
                </children>
             </Pane>
             <Separator layoutX="521.0" layoutY="135.0" orientation="VERTICAL" prefHeight="321.0" prefWidth="15.0" />
+            <Button layoutX="424.0" layoutY="456.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Button" />
           </children>
       </AnchorPane>
    </items>
