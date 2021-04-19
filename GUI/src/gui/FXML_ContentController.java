@@ -25,7 +25,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import com.fazecast.jSerialComm.*;
-
+//
+import javafx.event.EventHandler;
 /**
  * FXML Controller class
  *
@@ -208,7 +209,7 @@ public class FXML_ContentController implements Initializable {
 
 
         Timer t = new Timer();
-        t.schedule(new TimerTask() {
+        /*t.schedule(new TimerTask() {
             public void run() {
                 // Toutes les 0.5 secondes
                 // Tentative de lecture port com
@@ -216,8 +217,19 @@ public class FXML_ContentController implements Initializable {
 
                 //System.out.println("Tentative de lecture de carte");
             }
-        }, 0, 500);
+        }, 0, 500);*/
         // test
+
+        // kebab .....
+        //Platform.runLater()
+        //DisplayMessage.displayLater()
+        Arduino arduino = new Arduino();
+        arduino.enable();
+        arduino.getListeningEvents();
+        //SerialPort comPort = SerialPort.getCommPorts()[0];
+        //arduino.serialEvent(comPort);
+        
+        // salade tomate oignon chef.....
 
     }
 }
