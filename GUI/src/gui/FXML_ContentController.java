@@ -165,10 +165,10 @@ public class FXML_ContentController implements Initializable {
         //tableViewAbsent.setItems(observableAbsent);
 
         // \\ Test
-        observablePresent.removeAll(data);
-        tableViewPresent.setItems(observablePresent);
-        observableAbsent.removeAll(data);
-        tableViewAbsent.setItems(observableAbsent);
+        //observablePresent.removeAll(data);
+        //tableViewPresent.setItems(observablePresent);
+        //observableAbsent.removeAll(data);
+        //tableViewAbsent.setItems(observableAbsent);
         // \\ Test
 
         // test get time ........................................\\
@@ -218,13 +218,14 @@ public class FXML_ContentController implements Initializable {
                     }
                     System.out.println("données tableau : "+dataSerial);
 
+                    // Changement date et heure
+                    connexion.changeDB(dataSerial,getDate(),getHour());
+
                     // Recherche d'un ID similaire à ceux dans la base de données
                     for (int j = 0; j < data.size(); j++) {
                         String idBD = data.get(j).getID();
                         if (idBD.equals(dataSerial)) {
                             System.out.println(data.get(j).getFirstName()+"ID enregistré dans la base de données");
-                            // Changement date et heure
-                            connexion.changeDB(dataSerial,getDate(),getHour());
                             // Ajout dans le tableau de présence
                             observablePresent.add(data.get(j));
                             tableViewPresent.setItems(observablePresent);
