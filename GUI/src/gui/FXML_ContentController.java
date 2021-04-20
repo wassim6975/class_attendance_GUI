@@ -233,7 +233,7 @@ public class FXML_ContentController implements Initializable {
         long minDiff = timeDiff / (1000 * 60);
         if (minDiff > 5)
         {
-            JOptionPane.showInputDialog("You are late !");
+            JOptionPane.showMessageDialog(null, "You are late");
             return true;
         }
         return false;

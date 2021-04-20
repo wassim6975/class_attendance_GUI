@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="GUI/src"/>
+	<classpathentry kind="lib" path="GUI/dist/GUI.jar"/>
+	<classpathentry kind="lib" path="GUI/dist/lib/jSerialComm-2.7.0.jar"/>
+	<classpathentry kind="lib" path="GUI/dist/lib/sqlite-jdbc-3.32.3.2.jar"/>
+	<classpathentry kind="lib" path="jSerialComm-2.7.0.jar"/>
+	<classpathentry kind="lib" path="sqlite-jdbc-3.32.3.2.jar"/>
+	<classpathentry kind="output" path="GUI/build/classes"/>
+</classpath>
