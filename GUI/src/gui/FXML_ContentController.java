@@ -124,6 +124,11 @@ public class FXML_ContentController implements Initializable {
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
+    public String getDate(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -168,16 +173,19 @@ public class FXML_ContentController implements Initializable {
 
         // test get time ........................................\\
         String heureCours = FirstController.getClassStart();
-        String heureCours1 = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
+        String heureCoursSTring = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
         System.out.println("Heure cours début : "+FirstController.getClassStart());
         System.out.println("Il est :"+getHour());
         String heure = getHour();
-        String heure1 = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
+        String heureString = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
 
-        int hours = Integer.parseInt(heure1);
-        int classHours = Integer.parseInt(heureCours1);
-        if (hours > classHours)
+        int hours = Integer.parseInt(heureString);
+        int classHours = Integer.parseInt(heureCoursSTring);
+        if (hours < classHours)
         {
+            System.out.println("Vous etes à l'heure");
+        }
+        else {
             System.out.println("Vous etes en retard");
         }
         // test get time end........................................\\
@@ -218,6 +226,8 @@ public class FXML_ContentController implements Initializable {
                         String idBD = data.get(j).getID();
                         if (idBD.equals(dataSerial)) {
                             System.out.println(data.get(j).getFirstName()+"ID enregistré dans la base de données");
+                            // Changement date et heure
+                            connexion.changeDB(dataSerial,getDate(),getHour());
                             // Ajout dans le tableau de présence
                             observablePresent.add(data.get(j));
                             tableViewPresent.setItems(observablePresent);

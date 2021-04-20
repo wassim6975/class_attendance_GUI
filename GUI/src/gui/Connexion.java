@@ -134,4 +134,25 @@ public class Connexion {
         }
     }
 
+    // to change hours and date in the DB
+    public void changeDB (String ID, String Date, String Hours) {
+
+        String INSERT_SQL = "UPDATE students set Date ? , set Hours ? WHERE ID = ?";
+        //UPDATE students set date = "12:48" WHERE ID = "D73A57B3";
+        PreparedStatement ps = null;
+        try {
+            Connection conn = this.connect();
+            Statement stmt = conn.createStatement();
+
+            ps = conn.prepareStatement(INSERT_SQL);
+            ps.setString(1, ID);
+            ps.setString(2, Date);
+            ps.setString(3, Hours);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
