@@ -211,7 +211,7 @@ public class FXML_ContentController implements Initializable {
                     int i = 0;
                     String dataSerial = "";
                     dataSerial = dataSerial + arduino.getData().get(0);
-                    while (dataSerial.length() != 12)
+                    while (dataSerial.length() != 8)
                     {
                         i = i + 1;
                         dataSerial = dataSerial + arduino.getData().get(i);
