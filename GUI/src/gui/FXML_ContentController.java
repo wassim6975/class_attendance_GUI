@@ -220,6 +220,7 @@ public class FXML_ContentController implements Initializable {
 
                     // Changement date et heure
                     connexion.changeDB(dataSerial,getDate(),getHour());
+                    data = connexion.retunData ();
 
                     // Recherche d'un ID similaire à ceux dans la base de données
                     for (int j = 0; j < data.size(); j++) {
