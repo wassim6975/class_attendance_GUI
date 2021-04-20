@@ -119,48 +119,10 @@ public class FXML_ContentController implements Initializable {
         }
     }
 
-    private void serialData()  {
-        String ID = "";
-        System.out.println(SerialPort.getCommPorts()[0]);
-        SerialPort ComPort = SerialPort.getCommPorts()[0];
-        ComPort.setBaudRate(9600);
-        ComPort.openPort();
-        System.out.println("Connected:" + ComPort.getDescriptivePortName());
-
-        byte[] newData = new byte[ComPort.bytesAvailable()];
-        // lecture des données
-        int numRead = ComPort.readBytes(newData, newData.length);
-        if (numRead > 0) {
-            System.out.println("Read " + numRead + " bytes: " + new String(newData));
-
-            // conversion bytes to String
-            ID = new String(newData);
-
-            tableViewPresent.setItems(observablePresent);
-
-            //Connexion à la base de données sqlite
-            Connexion connexion = new Connexion();
-            connexion.connect();
-            data = connexion.retunData();
-
-            /*if (event.getEventType() == SerialPort.LISTENING_EVENT_DATA_WRITTEN)
-                System.out.println("All bytes were successfully transmitted!");
-            }*/
-
-            // Recherche d'un ID similaire à ceux dans la base de données
-            for (int i = 0; i < data.size(); i++) {
-                String idBD = data.get(i).getID();
-                if (idBD.equals(ID)) {
-                    System.out.println(data.get(i).getFirstName()+"ID enregistré dans la base de données");
-                    // Ajout dans le tableau de présence
-                    observablePresent.add(data.get(i));
-                    tableViewPresent.setItems(observablePresent);
-                    //
-                } else{
-                    System.out.println("Badge/Carte non connu, veuillez l'ajouter");
-                }
-            }
-        }
+    public String getHour(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 
     @Override
@@ -194,8 +156,31 @@ public class FXML_ContentController implements Initializable {
         data = connexion.retunData ();
 
 
+        //tableViewPresent.setItems(observablePresent);
+        //tableViewAbsent.setItems(observableAbsent);
+
+        // \\ Test
+        observablePresent.removeAll(data);
         tableViewPresent.setItems(observablePresent);
+        observableAbsent.removeAll(data);
         tableViewAbsent.setItems(observableAbsent);
+        // \\ Test
+
+        // test get time ........................................\\
+        String heureCours = FirstController.getClassStart();
+        String heureCours1 = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
+        System.out.println("Heure cours début : "+FirstController.getClassStart());
+        System.out.println("Il est :"+getHour());
+        String heure = getHour();
+        String heure1 = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
+
+        int hours = Integer.parseInt(heure1);
+        int classHours = Integer.parseInt(heureCours1);
+        if (hours > classHours)
+        {
+            System.out.println("Vous etes en retard");
+        }
+        // test get time end........................................\\
 
         //Remplissage du tableau avec la base de données
        for (int i = 0; i < data.size(); i++) {
@@ -245,30 +230,6 @@ public class FXML_ContentController implements Initializable {
                     arduino.removeDate();
                 }
 
-                /*if (arduino.getData().size() > 2) {
-                    String dataSerial = "";
-                    for (int i = 0; i < arduino.getData().size(); i++) {
-                        System.out.println("Données venant du Tableau");
-                        System.out.println(arduino.getData().get(i));
-                        dataSerial = dataSerial + arduino.getData().get(i);
-                    }
-
-                    // Recherche d'un ID similaire à ceux dans la base de données
-                    for (int i = 0; i < data.size(); i++) {
-                        String idBD = data.get(i).getID();
-                        if (idBD.equals(dataSerial)) {
-                            System.out.println(data.get(i).getFirstName()+"ID enregistré dans la base de données");
-                            // Ajout dans le tableau de présence
-                            observablePresent.add(data.get(i));
-                            tableViewPresent.setItems(observablePresent);
-                            //
-                        } else{
-                            System.out.println("Badge/Carte non connu, veuillez l'ajouter");
-                        }
-                    }
-                    // Suppression data
-                    arduino.removeDate();
-                }*/
             }
         }, 0, 2000);
 

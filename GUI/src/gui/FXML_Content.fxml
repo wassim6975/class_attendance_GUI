@@ -50,7 +50,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab text="Absent">
+            <Tab text="Late">
                <content>
                   <TableView fx:id="tableViewAbsent" prefHeight="200.0" prefWidth="200.0">
                      <columns>
