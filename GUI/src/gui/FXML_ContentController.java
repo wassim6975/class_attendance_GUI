@@ -165,31 +165,26 @@ public class FXML_ContentController implements Initializable {
         tableViewPresent.setItems(observablePresent);
         tableViewAbsent.setItems(observableAbsent);
 
-        // \\ Test
-        //observablePresent.removeAll(data);
-       // tableViewPresent.setItems(observablePresent);
-        //observableAbsent.removeAll(data);
-        //tableViewAbsent.setItems(observableAbsent);
-        // \\ Test
-
-        // test get time ........................................\\
+        // test get time Vithurshan........................................\\
+        // TODO : Comparer la date prise par l'utilisateur et la date actuelle
         /*String heureCours = FirstController.getClassStart();
-        String heureCoursSTring = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
-        System.out.println("Heure cours début : "+FirstController.getClassStart());
-        System.out.println("Il est :"+getHour());
-        String heure = getHour();
-        String heureString = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
+        //String heureCoursString = heureCours.substring(0,0);
+        char classHours1 = heureCours.charAt(0);
+        String heureCoursString1 = Character.toString(classHours1);
 
-        int hours = Integer.parseInt(heureString);
-        int classHours = Integer.parseInt(heureCoursSTring);
-        if (hours < classHours)
-        {
-            System.out.println("Vous etes à l'heure");
-        }
-        else {
-            System.out.println("Vous etes en retard");
-        }*/
-        // test get time end........................................\\
+
+        System.out.println(heureCoursString1);
+        
+        //System.out.println("Heure cours début : "+FirstController.getClassStart());
+        System.out.println("Il est : "+getHour());
+        String heure = getHour();
+         if(heure.equals(heureCours)){
+             System.out.println("Vous êtes à l'heure");
+         } else{
+             System.out.println("Vous n'êtes pas à l'heure");
+         }*/
+
+        //End get Time Vithurshan
 
         //Remplissage du tableau avec la base de données
        for (int i = 0; i < data.size(); i++) {
@@ -218,7 +213,6 @@ public class FXML_ContentController implements Initializable {
                         dataSerial = dataSerial + arduino.getData().get(i);
                     }
                     System.out.println("données tableau : "+dataSerial);
-
                     // Changement date et heure
                     connexion.changeDB(dataSerial,getDate(),getHour());
                     dataNew = connexion.retunData ();
