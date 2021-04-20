@@ -195,10 +195,7 @@ public class FXML_ContentController implements Initializable {
            observableList.add(data.get(i));
        }
        tableViewStudents.setItems(observableList);
-       
-        // kebab .....
-        //Platform.runLater()
-        //DisplayMessage.displayLater()
+
         Arduino arduino = new Arduino();
         arduino.enable();
         System.out.println(arduino.getListeningEvents());
