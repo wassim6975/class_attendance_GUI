@@ -199,10 +199,15 @@ public class FXML_ContentController implements Initializable {
                         String idBD = dataNew.get(j).getID();
                         if (idBD.equals(dataSerial)) {
                             System.out.println(dataNew.get(j).getFirstName()+"ID enregistré dans la base de données");
-                            // Ajout dans le tableau de présence
+                            if(isLate(class_start,getHour())){
+                                observableAbsent.add(dataNew.get(j));
+                                tableViewAbsent.setItems(observableAbsent);
+                            }
+                            else{
+                                // Ajout dans le tableau de présence
                             observablePresent.add(dataNew.get(j));
                             tableViewPresent.setItems(observablePresent);
-                            //
+                            }
                         } else{
                             System.out.println("Badge/Carte non connu, veuillez l'ajouter");
                         }
@@ -216,18 +221,24 @@ public class FXML_ContentController implements Initializable {
 
     }
     
-    public void isLate(String startDate,String endDate) {
+    public boolean isLate(String startClass,String currentDate) {
         SimpleDateFormat sdFormat = new SimpleDateFormat("HH:mm");
         try {
-        Date startDateObj = sdFormat.parse(startDate);
-        Date endDateObj = sdFormat.parse(endDate);
+        Date startDateObj = sdFormat.parse(startClass);
+        Date endDateObj = sdFormat.parse(currentDate);
         
         long timeDiff = endDateObj.getTime() - startDateObj.getTime();
         long minDiff = timeDiff / (1000 * 60);
-        System.out.println("Time difference in minutes: " + minDiff);
+        if (minDiff > 5)
+        {
+            JOptionPane.showInputDialog("You are late !");
+            return true;
+        }
+        return false;
        
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    return false;
     }
 }
