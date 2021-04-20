@@ -116,7 +116,7 @@ public class FXML_ContentController implements Initializable {
         for (int i = 0; i < data.size(); i++) {
             observableList.add(data.get(i));
             System.out.println(data.get(i));
-            tableViewPresent.setItems(observableList);
+            //tableViewPresent.setItems(observableList);
         }
     }
 
