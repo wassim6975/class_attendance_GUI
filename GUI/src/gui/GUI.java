@@ -26,7 +26,6 @@ public class GUI extends Application {
         stage.setTitle("ECE class attendance");
         stage.setScene(scene);
         stage.show();
-        System.out.println("test");
     }
 
     /**

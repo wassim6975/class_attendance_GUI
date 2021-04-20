@@ -172,7 +172,7 @@ public class FXML_ContentController implements Initializable {
         // \\ Test
 
         // test get time ........................................\\
-        String heureCours = FirstController.getClassStart();
+        /*String heureCours = FirstController.getClassStart();
         String heureCoursSTring = Character.toString(heureCours.charAt(0)) + Character.toString(heureCours.charAt(1)) + Character.toString(heureCours.charAt(3)) + Character.toString(heureCours.charAt(4));
         System.out.println("Heure cours début : "+FirstController.getClassStart());
         System.out.println("Il est :"+getHour());
@@ -187,7 +187,7 @@ public class FXML_ContentController implements Initializable {
         }
         else {
             System.out.println("Vous etes en retard");
-        }
+        }*/
         // test get time end........................................\\
 
         //Remplissage du tableau avec la base de données
