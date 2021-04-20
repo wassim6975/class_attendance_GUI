@@ -73,31 +73,21 @@ public class FXMLDocumentController implements Initializable {
     }
     public void go(ActionEvent event) throws FileNotFoundException, IOException{
         IDConnection manager = new IDConnection();
-        FXML_ContentController content = new FXML_ContentController();
         if(name.getText().isEmpty()||password.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Empty field");
         }
         else if(manager.check(name.getText(),password.getText())==false){
             JOptionPane.showMessageDialog(null, "Wrong password");
         }
-        else{
-            do{
-            Class_start = JOptionPane.showInputDialog("Class start at (HH:MM) : ");
-            }while(Class_start.isEmpty());
-            setClassStart(Class_start);
-            System.out.println(Class_start);
-            Parent root1 = FXMLLoader.load(getClass().getResource("FXML_Content.fxml"));
-            Stage stage1 = new Stage();
-            stage1.setTitle("ECE class attendance");
-            stage1.setScene(new Scene(root1));
-            stage1.show();
-            
+        else{            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_Content.fxml"));
+            Parent root = loader.load();
+            //FXML_ContentController content = loader.getController();
+            //content.myfunction(Class_start);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+                    
         }
-    }
-    public void setClassStart(String start){
-        Class_start=start;
-    }
-    public String getClassStart(){
-        return Class_start;
     }
 }

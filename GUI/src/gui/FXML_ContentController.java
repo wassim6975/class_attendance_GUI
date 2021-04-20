@@ -18,15 +18,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
-import com.fazecast.jSerialComm.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 //
-import javafx.event.EventHandler;
+import javax.swing.JOptionPane;
 /**
  * FXML Controller class
  *
@@ -54,8 +53,6 @@ public class FXML_ContentController implements Initializable {
     public TableView<Student> tableViewAbsent;
     public List<Student> data = new ArrayList<Student>();
     public List<Student> dataNew = new ArrayList<Student>();
-    FXMLDocumentController FirstController = new FXMLDocumentController();
-
     ObservableList<Student> observableList = FXCollections.observableArrayList(
             new Student("C73D57B3","Castex","Jean","24/03/2021", "15:21"),
             new Student("C93D57B3","Emmanuel","Macron","13/04/2021", "17:33")
@@ -67,14 +64,13 @@ public class FXML_ContentController implements Initializable {
     ObservableList<Student> observableAbsent = FXCollections.observableArrayList(
             new Student("A83D57B3","Lancelot","Bob","24/03/2021", "15:21"),
             new Student("A1D57B3","King","Rafael","13/04/2021", "17:33")
-    );
-
+    );    
+       public String class_start;
 
     /**
      * Initializes the controller class.
      */
 
-    @FXML
     public void testSerialCom() {
         //
 
@@ -102,8 +98,10 @@ public class FXML_ContentController implements Initializable {
             stage3.setScene(new Scene(root3));
             stage3.show();
         } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
+    @FXML
     public void handleButtonRefreshStudents(ActionEvent actionEvent) {
         observableList.removeAll(data);
         tableViewStudents.setItems(observableList);
@@ -133,6 +131,9 @@ public class FXML_ContentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        do{
+            class_start = JOptionPane.showInputDialog("Class start at (HH:MM) : ");
+            }while(class_start.isEmpty());
         IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
         LastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         FirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -150,7 +151,6 @@ public class FXML_ContentController implements Initializable {
         FirstNameColumnA.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         DateColumnA.setCellValueFactory(new PropertyValueFactory<>("Date"));
         HourColumnA.setCellValueFactory(new PropertyValueFactory<>("Hours"));
-
         tableViewStudents.setEditable(true);
         tableViewPresent.setEditable(true);
         tableViewAbsent.setEditable(true);
@@ -160,32 +160,9 @@ public class FXML_ContentController implements Initializable {
         connexion.connect();
         // Récuperation des données venant de la base de données
         data = connexion.retunData ();
-
-
         tableViewPresent.setItems(observablePresent);
         tableViewAbsent.setItems(observableAbsent);
-
-        // test get time Vithurshan........................................\\
-        // TODO : Comparer la date prise par l'utilisateur et la date actuelle
-        /*String heureCours = FirstController.getClassStart();
-        //String heureCoursString = heureCours.substring(0,0);
-        char classHours1 = heureCours.charAt(0);
-        String heureCoursString1 = Character.toString(classHours1);
-
-
-        System.out.println(heureCoursString1);
         
-        //System.out.println("Heure cours début : "+FirstController.getClassStart());
-        System.out.println("Il est : "+getHour());
-        String heure = getHour();
-         if(heure.equals(heureCours)){
-             System.out.println("Vous êtes à l'heure");
-         } else{
-             System.out.println("Vous n'êtes pas à l'heure");
-         }*/
-
-        //End get Time Vithurshan
-
         //Remplissage du tableau avec la base de données
        for (int i = 0; i < data.size(); i++) {
            observableList.add(data.get(i));
@@ -237,5 +214,20 @@ public class FXML_ContentController implements Initializable {
             }
         }, 0, 2000);
 
+    }
+    
+    public void isLate(String startDate,String endDate) {
+        SimpleDateFormat sdFormat = new SimpleDateFormat("HH:mm");
+        try {
+        Date startDateObj = sdFormat.parse(startDate);
+        Date endDateObj = sdFormat.parse(endDate);
+        
+        long timeDiff = endDateObj.getTime() - startDateObj.getTime();
+        long minDiff = timeDiff / (1000 * 60);
+        System.out.println("Time difference in minutes: " + minDiff);
+       
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
