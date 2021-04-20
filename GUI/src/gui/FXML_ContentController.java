@@ -165,10 +165,10 @@ public class FXML_ContentController implements Initializable {
         //tableViewAbsent.setItems(observableAbsent);
 
         // \\ Test
-        //observablePresent.removeAll(data);
-        //tableViewPresent.setItems(observablePresent);
-        //observableAbsent.removeAll(data);
-        //tableViewAbsent.setItems(observableAbsent);
+        observablePresent.removeAll(data);
+        tableViewPresent.setItems(observablePresent);
+        observableAbsent.removeAll(data);
+        tableViewAbsent.setItems(observableAbsent);
         // \\ Test
 
         // test get time ........................................\\
