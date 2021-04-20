@@ -53,6 +53,7 @@ public class FXML_ContentController implements Initializable {
     public TableView<Student> tableViewPresent;
     public TableView<Student> tableViewAbsent;
     public List<Student> data = new ArrayList<Student>();
+    public List<Student> dataNew = new ArrayList<Student>();
     FXMLDocumentController FirstController = new FXMLDocumentController();
 
     ObservableList<Student> observableList = FXCollections.observableArrayList(
@@ -161,14 +162,14 @@ public class FXML_ContentController implements Initializable {
         data = connexion.retunData ();
 
 
-        //tableViewPresent.setItems(observablePresent);
-        //tableViewAbsent.setItems(observableAbsent);
+        tableViewPresent.setItems(observablePresent);
+        tableViewAbsent.setItems(observableAbsent);
 
         // \\ Test
-        observablePresent.removeAll(data);
-        tableViewPresent.setItems(observablePresent);
-        observableAbsent.removeAll(data);
-        tableViewAbsent.setItems(observableAbsent);
+        //observablePresent.removeAll(data);
+       // tableViewPresent.setItems(observablePresent);
+        //observableAbsent.removeAll(data);
+        //tableViewAbsent.setItems(observableAbsent);
         // \\ Test
 
         // test get time ........................................\\
@@ -220,15 +221,15 @@ public class FXML_ContentController implements Initializable {
 
                     // Changement date et heure
                     connexion.changeDB(dataSerial,getDate(),getHour());
-                    data = connexion.retunData ();
+                    dataNew = connexion.retunData ();
 
                     // Recherche d'un ID similaire à ceux dans la base de données
-                    for (int j = 0; j < data.size(); j++) {
-                        String idBD = data.get(j).getID();
+                    for (int j = 0; j < dataNew.size(); j++) {
+                        String idBD = dataNew.get(j).getID();
                         if (idBD.equals(dataSerial)) {
-                            System.out.println(data.get(j).getFirstName()+"ID enregistré dans la base de données");
+                            System.out.println(dataNew.get(j).getFirstName()+"ID enregistré dans la base de données");
                             // Ajout dans le tableau de présence
-                            observablePresent.add(data.get(j));
+                            observablePresent.add(dataNew.get(j));
                             tableViewPresent.setItems(observablePresent);
                             //
                         } else{

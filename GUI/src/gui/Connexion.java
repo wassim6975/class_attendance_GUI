@@ -137,22 +137,26 @@ public class Connexion {
     // to change hours and date in the DB
     public void changeDB (String ID, String Date, String Hours) {
 
-        String INSERT_SQL = "UPDATE students set Date ? , set Hours ? WHERE ID = ?";
+        String sql = "UPDATE students SET Date = ? , "
+                + "Hours = ? "
+                + "WHERE ID = ?";
+
         //UPDATE students set date = "12:48" WHERE ID = "D73A57B3";
         PreparedStatement ps = null;
-        try {
-            Connection conn = this.connect();
-            Statement stmt = conn.createStatement();
 
-            ps = conn.prepareStatement(INSERT_SQL);
-            ps.setString(1, ID);
-            ps.setString(2, Date);
-            ps.setString(3, Hours);
-            ps.executeUpdate();
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            // set the corresponding param
+            pstmt.setString(1, Date);
+            pstmt.setString(2, Hours);
+            pstmt.setString(3, ID);
+            // update
+            pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+
         }
+
     }
 
 }
