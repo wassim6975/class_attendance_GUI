@@ -202,6 +202,8 @@ public class FXML_ContentController implements Initializable {
                             if(isLate(class_start,getHour())){
                                 observableAbsent.add(dataNew.get(j));
                                 tableViewAbsent.setItems(observableAbsent);
+                                observablePresent.add(dataNew.get(j));
+                                tableViewPresent.setItems(observablePresent);
                             }
                             else{
                                 // Ajout dans le tableau de présence
