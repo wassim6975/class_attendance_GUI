@@ -2,8 +2,9 @@
 
 This project is an electronic project which aims to create a digital class attendance system with the help of an RFID receiver and an ATMEGA328P micocontroller.
 
-This directory is the GUI allowing the visualization and management of the data of students present, absent and late.
-This interface integrates an SQLite database and is developed with the JAVA FX framework.
+This directory contains the code for controlling the microcontroller (ATMEGA 328P)
+and the GUI allowing the visualization and management of the data of students present, absent and late.
+This GUI integrates an SQLite database and is developed with the JAVA FX framework.
 
 ## Prerequistes
 

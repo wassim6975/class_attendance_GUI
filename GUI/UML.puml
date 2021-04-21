@@ -1,0 +1,119 @@
+@startuml
+class gui.FXMLAddStudentController {
+- TextField firstNameAdd
+- TextField lastNameAdd
+- TextField IDAdd
++ void handleButtonAction(ActionEvent)
+}
+class gui.GUI {
++ void start(Stage)
++ {static} void main(String[])
+}
+class gui.FXML_ContentController {
++ TableColumn<Student,String> IDColumn
++ TableColumn<Student,String> LastNameColumn
++ TableColumn<Student,String> FirstNameColumn
++ TableColumn<Student,String> DateColumn
++ TableColumn<Student,String> HourColumn
++ TableColumn<Student,String> IDColumnP
++ TableColumn<Student,String> LastNameColumnP
++ TableColumn<Student,String> FirstNameColumnP
++ TableColumn<Student,String> DateColumnP
++ TableColumn<Student,String> HourColumnP
++ TableColumn<Student,String> IDColumnA
++ TableColumn<Student,String> LastNameColumnA
++ TableColumn<Student,String> FirstNameColumnA
++ TableColumn<Student,String> DateColumnA
++ TableColumn<Student,String> HourColumnA
++ TableView<Student> tableViewStudents
++ TableView<Student> tableViewPresent
++ TableView<Student> tableViewAbsent
++ List<Student> data
++ List<Student> dataNew
+~ ObservableList<Student> observableList
++ ObservableList<Student> observablePresent
+~ ObservableList<Student> observableAbsent
++ String class_start
++ void testSerialCom()
+- void handleButtonSearch(ActionEvent)
+- void handleButtonAddStudent(ActionEvent)
++ void handleButtonRefreshStudents(ActionEvent)
++ String getHour()
++ String getDate()
++ void initialize(URL,ResourceBundle)
++ boolean isLate(String,String)
+}
+class gui.IDConnection {
++ boolean check(String,String)
+}
+class gui.FXML_searchController {
+- ImageView img_photo
+- Label label_lastName
+- Label label_firstName
+- Label label_studentID
++ List<String> dataSearch
+- Label label_ID
+- Label label_date
+- Label label_hours
+- TextField firstNameSearch
+- TextField lastNameSearch
+- void handleButtonAction(ActionEvent)
++ void initialize(URL,ResourceBundle)
+}
+class gui.Arduino {
++ List<String> Sdata
++ List<Student> dta
++ void enable()
++ int getListeningEvents()
++ void serialEvent(SerialPortEvent)
++ List<String> getData()
++ void removeDate()
+}
+class gui.Connexion {
++ Connection connect()
++ void selectAll()
++ List<Student> retunData()
++ List<String> searchStudent(String,String)
++ String getDate()
++ String getHour()
++ void addDataDB(String,String,String)
++ void changeDB(String,String,String)
+}
+class gui.Student {
+- String ID
+- String lastName
+- String firstName
+- String Date
+- String Hours
++ String getID()
++ void seID(String)
++ String getFirstName()
++ void setFirstName(String)
++ String getLastName()
++ void setLastName(String)
++ String getDate()
++ void setDate(String)
++ String getHours()
++ void setHours(String)
+}
+class gui.FXMLDocumentController {
+- Button button
+- Label label_date
+- Label label_hour
+- TextField name
+- PasswordField password
++ String Class_start
+- void handleButtonAction(ActionEvent)
++ void initialize(URL,ResourceBundle)
++ String getDate()
++ String getHour()
++ void go(ActionEvent)
+}
+
+
+javafx.application.Application <|-- gui.GUI
+javafx.fxml.Initializable <|.. gui.FXML_ContentController
+javafx.fxml.Initializable <|.. gui.FXML_searchController
+com.fazecast.jSerialComm.SerialPortDataListener <|.. gui.Arduino
+javafx.fxml.Initializable <|.. gui.FXMLDocumentController
+@enduml
