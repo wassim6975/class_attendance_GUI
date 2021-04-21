@@ -54,7 +54,7 @@ public class FXML_ContentController implements Initializable {
     public List<Student> data = new ArrayList<Student>();
     public List<Student> dataNew = new ArrayList<Student>();
     ObservableList<Student> observableList = FXCollections.observableArrayList(
-           
+
     );
     public ObservableList<Student> observablePresent = FXCollections.observableArrayList(
 
