@@ -14,8 +14,6 @@ import javafx.application.Platform;
 import javafx.application.Platform;
 
 /**
- *
- * @author vithu
  */
 public class GUI extends Application {
     @Override

@@ -26,8 +26,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 /**
  * FXML Controller class
- *
- * @author vithu
  */
 
 public class FXML_searchController implements Initializable {
